@@ -1,0 +1,4 @@
+.DS_Store
+TEMP/
+Data/Datasets/Frau_1867-2025.json
+Data/ModelPredictedData/Migrant_1867-2025_AllModels.json
