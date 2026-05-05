@@ -94,16 +94,16 @@ def build_input_texts(df, encoding="target_only", add_category=False):
 
     elif encoding == "target+context" and not add_category:
         texts = df.apply(
-            lambda x: " [SEP] ".join(
-                [str(x["Previous"]), str(x["Middle"]), str(x["Next"])]
-            ),
+            lambda x: f"{x['Previous']} {x['Middle']} {x['Next']}",
             axis=1,
         ).tolist()
 
     elif encoding == "target+context" and add_category:
         texts = df.apply(
-            lambda x: str(x["Category"]) + " [SEP] " + " [SEP] ".join(
-                [str(x["Previous"]), str(x["Middle"]), str(x["Next"])]
+            lambda x: (
+                str(x["Category"])
+                + " [SEP] "
+                + f"{x['Previous']} {x['Middle']} {x['Next']}"
             ),
             axis=1,
         ).tolist()
@@ -396,8 +396,8 @@ if __name__ == "__main__":
         num_training_steps=total_steps,
     )
 
-    best_metric_value = -float("inf")
-    best_model_path = os.path.join(out_dir, "best_model.pt")
+    #best_metric_value = -float("inf")
+    #best_model_path = os.path.join(out_dir, "best_model.pt")
 
     for epoch in range(global_args.epochs):
         print()
@@ -430,15 +430,14 @@ if __name__ == "__main__":
         current_metric_value = dev_metrics[metric_name]
         print(f"Tracked dev metric ({global_args.best_metric}): {current_metric_value:.6f}")
 
-        if current_metric_value > best_metric_value:
-            best_metric_value = current_metric_value
-            torch.save(model.state_dict(), best_model_path)
-            print(f"Saved new best model to: {best_model_path}")
+        #if current_metric_value > best_metric_value:
+        #    best_metric_value = current_metric_value
+        #    torch.save(model.state_dict(), best_model_path)
+        #    print(f"Saved new best model to: {best_model_path}")
 
-    if os.path.exists(best_model_path):
-        model.load_state_dict(torch.load(best_model_path, map_location=global_args.device))
-        model.to(global_args.device)
-        print(f"\nLoaded best model from: {best_model_path}")
+    last_model_path = os.path.join(out_dir, "last_model.pt")
+    torch.save(model.state_dict(), last_model_path)
+    print(f"Saved last epoch model to: {last_model_path}")
 
     print("\nFinal dev evaluation:")
     evaluate(

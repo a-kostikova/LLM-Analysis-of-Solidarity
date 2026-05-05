@@ -91,16 +91,16 @@ def build_input_texts(df, encoding="target_only", add_category=False):
 
     elif encoding == "target+context" and not add_category:
         texts = df.apply(
-            lambda x: " [SEP] ".join(
-                [str(x["Previous"]), str(x["Middle"]), str(x["Next"])]
-            ),
+            lambda x: f"{x['Previous']} {x['Middle']} {x['Next']}",
             axis=1,
         ).tolist()
 
     elif encoding == "target+context" and add_category:
         texts = df.apply(
-            lambda x: str(x["Category"]) + " [SEP] " + " [SEP] ".join(
-                [str(x["Previous"]), str(x["Middle"]), str(x["Next"])]
+            lambda x: (
+                str(x["Category"])
+                + " [SEP] "
+                + f"{x['Previous']} {x['Middle']} {x['Next']}"
             ),
             axis=1,
         ).tolist()
