@@ -2,7 +2,7 @@
 
 This folder contains two related human-annotated datasets on solidarity in German parliamentary debates.
 
-The first dataset is the human-annotated data (2,864 instances) released alongside the paper [Fine-Grained Detection of Solidarity for Women and Migrants in 155 Years of German Parliamentary Debates](https://aclanthology.org/2024.emnlp-main.337/#) ([DominikBeese/FairGer](https://github.com/DominikBeese/FairGer)), extended to include **all annotators' labels**, not only the consensus labels.
+The first dataset is the human-annotated data (2,184 instances) released alongside the paper [Fine-Grained Detection of Solidarity for Women and Migrants in 155 Years of German Parliamentary Debates](https://aclanthology.org/2024.emnlp-main.337/#) ([DominikBeese/FairGer](https://github.com/DominikBeese/FairGer)), extended to include **all annotators' labels**, not only the consensus labels.
 
 The second dataset is the extension (756 instances) introduced in [LLM Analysis of 150+ Years of German Parliamentary Debates on Migration Reveals a Shift from Post-War Solidarity to Anti-Solidarity in the Last Decade](https://arxiv.org/pdf/2509.07274).
 
